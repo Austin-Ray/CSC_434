@@ -3,33 +3,18 @@
         integer i, numOfTenths, max_vol_index
         real area, pi, radii(100), height(100), areas(100), vols(100)
 
-        pi = 3.14159
+        pi            = 3.14159
         max_vol_index = 0
 
         write(*, *) 'Square meters of sheet metal to work with: '
-        read(*, *) area
+        read(*, *)  area
 
-c       Initialize the radii array
         do 10 i = 1, 100
-          radii(i) = i * 0.1
+          radii(i)  = i * 0.1
+          height(i) = calc_height(area, pi, radii(i))
+          areas(i)  = calc_area(pi, radii(i), height(i))
+          vols(i)   = calc_vol(pi, radii(i), height(i))
 10      continue
-
-c       Calculate the height values by rearranging the area formula of a
-c       cylinder
-        do 20 i = 1, 100
-          height(i) = (area / (2 * pi * radii(i))) - radii(i)
-20      continue
-
-c       Calculate the areas with the appropriate radii and height
-        do 30 i = 1, 100
-          areas(i) = 2 * pi * radii(i) * height(i) 
-     +               + 2 * pi * radii(i)**2
-30      continue
-
-c       Calculate volumes
-        do 40 i = 1, 100
-          vols(i) = pi * radii(i)**2 * height(i)
-40      continue
 
 c       Print the report
 1000    format(2X, F5.1, 3(2X, F7.2))
@@ -53,4 +38,23 @@ c       Determine the maximum volumen and save it's index.
 1100    format(A, F10.2, A, F10.2, X, A, F7.2)
 
         stop
+      end
+
+c     Calculate the surface area of a cylinder using the standard
+c     formula
+      real function calc_area(pi, radius, height)
+        calc_area =  2 * pi * radius * height
+     +             + 2 * pi * radius**2
+
+      end
+
+c     Calculate the volume of a cylinder using the standard formula
+      real function calc_vol(pi, radius, height)
+        calc_vol = pi * radius**2 * height
+      end
+
+c     Calculate the height based on a rearranged version of the
+c     cylindrical surface area forula.
+      real function calc_height(area, pi, radius)
+          calc_height = area / (2 * pi * radius) - radius
       end
