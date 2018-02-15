@@ -1,5 +1,5 @@
           program main
-              integer i, pass_down/0/
+              integer i, pass_down/0/, show_staticness
 
               do 10 i = 1, 10
                 pass_down = show_staticness(pass_down + 1)
@@ -8,7 +8,7 @@
               stop  'End of program'
           end
 
-          real function show_staticness(pass_down)
+          integer function show_staticness(pass_down)
               integer pass_down, count/0/
               write(*,*) "PARAMETER: ", pass_down, "LOCAL: ", count
 
