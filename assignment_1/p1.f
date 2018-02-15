@@ -11,7 +11,9 @@
 
         do 10 i = 1, 100
           radii(i)  = i * 0.1
-          height(i) = calc_height(area, pi, radii(i))
+
+c         Truncate the height to two decimal places.
+          height(i) = aint(calc_height(area, pi, radii(i)) * 100) / 100
           areas(i)  = calc_area(pi, radii(i), height(i))
           vols(i)   = calc_vol(pi, radii(i), height(i))
 10      continue
