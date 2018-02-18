@@ -1,11 +1,15 @@
+src_dir=src
+out_dir=out
+
+
 all: p1 p2
 
 p1:
-	gfortran p1.f -o p1.out
+	gfortran $(src_dir)/p1.f -o $(out_dir)/p1.out
 
 p2:
-	gfortran p2.f -o p2.out
+	gfortran $(src_dir)/p2.f -o $(out_dir)/p2.out
 
 clean:
-	rm *.out
+	rm $(out_dir)*.out
 
