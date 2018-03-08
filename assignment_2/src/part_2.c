@@ -11,8 +11,8 @@ int main() {
 long long fact(long long n) {
   printf("Address of n = %p,\tValue of n = %lld\n", (void *)&n, n);
 
-  if (n == 1)
-    return 1;
+  // 1! and 0! are equal to 1.
+  if (n < 2) return 1;
 
   return fact(n - 1);
 }
