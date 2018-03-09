@@ -1,12 +1,27 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/**
+ * A demo function to isolate all the address printing, except for the main()
+ *
+ * This function is used primarily for containing the printing code, but also to
+ * show how parameter are allocated onto the stack.
+ *
+ * @param   An integer parameter
+ * @param   A double parameter
+ * @param   A char parameter
+ */
 void demo_func(int, double, char);
 
 int     global_int    = 1;
 double  global_double = 1.0;
 char    global_char   = 'c';
 
+/**
+ * Entry point in the program
+ *
+ * @return  Exit code
+ */
 int main() {
   // This causes my Makefile to emit a warning because this is undefined
   // behavior in ISO C. All research indicates that there is no safe way to
@@ -18,6 +33,7 @@ int main() {
   return 0;
 }
 
+/*! @copydoc demo::function() */
 void demo_func(int i, double d, char c) {
   // This suffers from the same warning as the previous function pointer noted
   // within the main() function.
