@@ -1,37 +1,35 @@
 # Part 1
-|---------------------------------|----------------|
-| Variable                        | Address        |
-|---------------------------------|----------------|
-| main() function                 | 0x5618721ae74a |
-| demo_func() function            | 0x5618721ae790 |
-| ...                             | ...            |
-| static int variable             | 0x5618723b005c |
-| global int variable*            | 0x5618723b005c |
-| ...                             | ...            |
-| static double variable          | 0x5618723b0060 |
-| global double variable*         | 0x5618723b0060 |
-| ...                             | ...            |
-| global char variable            | 0x5618723b0068 |
-| static char variable*           | 0x5618723b0068 |
-| ...                             | ...            |
-| data of dynamic int variable    | 0x561872967270 |
-| data of dynamic double variable | 0x561872967290 |
-| data of dynamic char variable   | 0x5618729672b0 |
-| ...                             | ...            |
-| double parameter                | 0x7ffdd2bb0cb0 |
-| integer parameter               | 0x7ffdd2bb0cbc |
-| char parameter                  | 0x7ffdd2bb0cb8 |
-| local int variable              | 0x7ffdd2bb0ccc |
-| local char variable             | 0x7ffdd2bb0ccb |
-| local double variable           | 0x7ffdd2bb0cd0 |
-| dynamic int variable            | 0x7ffdd2bb0cd8 |
-| dynamic double variable         | 0x7ffdd2bb0ce0 |
-| dynamic char variable           | 0x7ffdd2bb0ce8 |
-| string literal                  | 0x7ffdd2bb0cf0 |
-|---------------------------------|----------------|
-
-*These variables share the same memory address because GCC optimized them since
- the static and local share the same value.
+|-------------------------------|----------------|
+| Variable                      | Address        |
+|-------------------------------|----------------|
+| main() function               | 0x5592b104174a |
+| ...                           | ...            |
+| demo_func() function          | 0x5592b1041790 |
+| ...                           | ...            |
+| data of dynamic int variable  | 0x5592b1642270 |
+| ...                           | ...            |
+| dynamic double variable       | 0x5592b1642290 |
+| ...                           | ...            |
+| data of dynamic char variable | 0x5592b16422b0 |
+| ...                           | ...            |
+| global int variable           | 0x5592b1243048 |
+| global double variable        | 0x5592b1243050 |
+| global char variable          | 0x5592b1243058 |
+| static int variable           | 0x5592b124305c |
+| static double variable        | 0x5592b1243060 |
+| static char variable          | 0x5592b1243068 |
+| ...                           | ...            |
+| double parameter              | 0x7ffe190d4f60 |
+| char parameter                | 0x7ffe190d4f68 |
+| integer parameter             | 0x7ffe190d4f6c |
+| local char variable           | 0x7ffe190d4f7b |
+| local int variable            | 0x7ffe190d4f7c |
+| local double variable         | 0x7ffe190d4f80 |
+| dynamic int variable          | 0x7ffe190d4f88 |
+| dynamic double variable       | 0x7ffe190d4f90 |
+| dynamic char variable         | 0x7ffe190d4f98 |
+| string literal                | 0x7ffe190d4fa0 |
+|-------------------------------|----------------|
 
 # Part 2
 |-------------------|----------------|

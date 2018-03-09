@@ -73,9 +73,9 @@ void demo_func(int i, double d, char c) {
   printf("Address of static char variable = %p\n",    (void *)(&stat_char));
 
   // Print static variables
-  printf("Address of global int variable = %p\n",     (void *)(&stat_int));
-  printf("Address of global double variable = %p\n",  (void *)(&stat_dbl));
-  printf("Address of global char variable = %p\n",    (void *)(&stat_char));
+  printf("Address of global int variable = %p\n",     (void *)(&global_int));
+  printf("Address of global double variable = %p\n",  (void *)(&global_double));
+  printf("Address of global char variable = %p\n",    (void *)(&global_char));
 
   // Print dynamic variables
   printf("Address of dynamic int variable = %p\n",    (void *)(&dyn_int));
