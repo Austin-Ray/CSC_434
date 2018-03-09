@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+/**
+ * Show how memory is mapped in an array.
+ *
+ * @return Exit code
+ */
 int main() {
   int d1 = 4;
   int d2 = 2;
