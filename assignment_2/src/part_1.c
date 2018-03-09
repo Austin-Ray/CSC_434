@@ -105,7 +105,7 @@ void demo_func(int i, double d, char c) {
   printf("Data address of data of dynamic char variable = %p\n",  (void *)dyn_char);
 
   // Print String literal
-  printf("Address of string literal = %p\n", (void *)(&str_lit));
+  printf("Address of string literal = %p\n", (void *)(str_lit));
 
   // Get rid of the dynamically allocated memory.
   free(dyn_int);

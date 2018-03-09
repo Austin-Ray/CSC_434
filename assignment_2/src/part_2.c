@@ -45,6 +45,6 @@ long long fact(long long n) {
   // 1! and 0! are equal to 1.
   if (n < 2) return 1;
 
-  return fact(n - 1);
+  return n * fact(n - 1);
 }
 
