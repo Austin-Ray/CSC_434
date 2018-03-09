@@ -1,3 +1,19 @@
+c     Compute the optimal dimensions of a cylinder given an specified area.
+c     Copyright (C) 2018  Austin D. Ray
+c
+c     This program is free software: you can redistribute it and/or modify
+c     it under the terms of the GNU Affero General Public License as
+c     published by the Free Software Foundation, either version 3 of the
+c     License, or (at your option) any later version.
+c
+c     This program is distributed in the hope that it will be useful,
+c     but WITHOUT ANY WARRANTY; without even the implied warranty of
+c     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+c     GNU Affero General Public License for more details.
+c
+c     You should have received a copy of the GNU Affero General Public License
+c     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
       program part_one
 
         integer i, numOfTenths, max_vol_index
