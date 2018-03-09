@@ -1,5 +1,5 @@
 # Part 1
-|-------------------------------|----------------|
+
 | Variable                      | Address        |
 |-------------------------------|----------------|
 | main() function               | 0x5592b104174a |
@@ -32,7 +32,7 @@
 |-------------------------------|----------------|
 
 # Part 2
-|-------------------|----------------|
+
 | Label             | Actual Stack   |
 |-------------------|----------------|
 | Parameter n       | 1              |
@@ -81,7 +81,6 @@
 # Part 3
 C uses row-major order
 
-|-----------------|----------------|
 | Row-major order | Memory Address |
 |-----------------|----------------|
 | array[0][0][0]  | 0x7fff82920170 |
@@ -113,10 +112,10 @@ C uses row-major order
 Formula:
 
 High-level formula:
-start position + ((i*j*k) + (i*j) + (i)) * size of data type
+start position + ((i\*j\*k) + (i*j) + (i)) * size of data type
 
 C Code for getting memory address:
-```
+```c
 long start_pos = &array[0][0][0]; // First memory address in the array
 long mem_loc = start_pos + ((i*j*k) + (j*k) + k) * sizeof(int);
 printf("%o", mem_loc);
