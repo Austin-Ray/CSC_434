@@ -15,18 +15,29 @@
 % along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 % Declare the types for every item in the game.
-type(rabbit,    animal).
-type(dog,       animal).
-type(fish,      animal).
-type(whale,     animal).
-type(dinosaur,  animal).
-type(snake,     animal).
+type(rabbit,      animal).
+type(dog,         animal).
+type(fish,        animal).
+type(whale,       animal).
+type(dinosaur,    animal).
+type(snake,       animal).
+type(pterodactyl, animal).
+type(starfish,    animal).
+type(ant,         animal).
+type(eagle,       animal).
+type(shark,       animal).
+type(chicken,     animal).
+type(horse,       animal).
+type(lion,        animal).
 
+type(rose,      plant).
 type(carrot,    plant).
 type(orange,    plant).
 type(seaweed,   plant).
 type(coral,     plant).
 
+type(pencil,    object).
+type(cup,       object).
 type(computer,  object).
 type(car,       object).
 type(boat,      object).
@@ -42,11 +53,42 @@ alive(carrot).
 alive(orange).
 alive(seaweed).
 alive(coral).
+alive(starfish).
+alive(ant).
+alive(eagle).
+alive(shark).
+alive(chicken).
+alive(horse).
+alive(rose).
+alive(lion).
+alive(rose).
 
 % Add mammals to the mammal category
 mammal(rabbit).
 mammal(dog).
 mammal(whale).
+mammal(horse).
+mammal(pterodactyl).
+mammal(shark).
+mammal(lion).
+
+roar(lion).
+
+fly(pterodactyl).
+fly(eagle).
+
+egg(eagle).
+egg(chicken).
+egg(shark).
+
+red(rose).
+red(starfish).
+
+swim(shark).
+swim(whale).
+swim(fish).
+
+neigh(horse).
 
 % Add things that belong in water to the water category
 water(boat).
@@ -60,6 +102,14 @@ underwater(whale).
 underwater(fish).
 underwater(coral).
 underwater(seaweed).
+underwater(shark).
+underwater(starfish).
+
+liquid(cup).
+
+writes(pencil).
+
+insect(ant).
 
 fruit(orange).
 
@@ -79,89 +129,44 @@ ask_mammal(Mammal)          :- write('Is it a mammal? (yes/no) \n'),            
 ask_friend(Friend)          :- write('Is it man\'s best friend? (yes/no) \n'),        read(Friend).
 ask_ferner(Ferner)          :- write('Is it a misclassified by Ferner? (yes/no) \n'), read(Ferner).
 ask_fruit(Fruit)            :- write('Is it a fruit? (yes/no)'),                      read(Fruit).
+ask_liquid(Liquid)            :- write('Can it hold liquid? (yes/no)'),read(Liquid).
+ask_write(Write)            :- write('Can you write with it? (yes/no)'),read(Write).
+ask_insect(Insect)            :- write('Is it an insect? (yes/no)'),                      read(Insect).
+ask_roar(Roar)            :- write('Does it roar? (yes/no)'),                      read(Roar).
+ask_fly(Fly)            :- write('Can it fly? (yes/no)'),                      read(Fly).
+ask_egg(Egg)            :- write('Does it lay eggs? (yes/no)'),                      read(Egg).
+ask_red(Red)            :- write('Is it red? (yes/no)'),                      read(Red).
+ask_swim(Swim)            :- write('Does it swim? (yes/no)'),                      read(Swim).
+ask_neigh(Neigh)            :- write('Does it neigh? (yes/no)'),                      read(Neigh).
 
-% Play the guessing game
-% Or lose your mind while writing it
-% There are tooooo many issues with Prolog that I do not have time to figure out
-% HAVE FUN WITH THIS HOT MESS!
-guess(Thing) :- (ask_type(Type),
-% If object
-((Type == object) ->
-  (
-    ask_vehicle(Vehicle),
-    % If Vehicle
-    ((Vehicle == yes) -> (
-      ask_water(Water),
-      ((Water == no) -> (
-        ask_underwater(Underwater)
-      ) ; (Underwater = no))
-    ) ; (Water = no, Underwater = no)), % Else not a vehicle so no water or underwater.
-  % Common to all objects
-  Ferner = no,
-  Mammal = no,
-  Life = no,
-  Fruit = no,
-  Friend = no
-) ;
+% Play the game or with my sanity!
+guess(Thing) :-
 (
-  % This is an else statement.
-  % SOFTWARE SHOULD NOT BE WRITTEN LIKE THIS BUT I'VE LOST MY MIND
-  ((Type == animal) ->
-    (
-      ask_alive(Life),
-      ((Life == yes) -> (
-        ask_mammal(Mammal),
-        ask_underwater(Underwater),
-        ((Underwater == no) ->
-          (
-            ask_friend(Friend)
-          ) ; (Friend = no))
-        ) ; (Mammal = no, Underwater = no, Friend = no)),
-
-        Fruit = no,
-        Ferner = no,
-        Vehicle = no,
-        Water = no
-      ) ;
-      (
-        % WELCOME TO THE SECOND ELSE WOOT WOOT BAD CODE
-        % But it works!
-        ((Type == plant) ->
-          (
-            ask_underwater(Underwater),
-            ((Underwater == yes) ->
-              (
-                ask_ferner(Ferner),
-                Fruit = no
-              ) ; (ask_fruit(Fruit))),
-              Life = yes,
-              Vehicle = no,
-              Mammal = no,
-              Water = no,
-              Friend = no
-            )
-          )
-        )
-      )
-    )
-  ),
-  % It worked though.
-  % It worked though.
-  report(Thing, Type, Life, Mammal, Vehicle, Water, Underwater, Ferner, Fruit, Friend)
+  ask_type(Type),
+  ((Type == object) -> Life = no                      ; ask_alive(Life)),
+  ((Type == animal) -> ask_friend(Friend)             ; Friend = no),
+  ((Type == animal) -> ask_mammal(Mammal)             ; Mammal = no),
+  ((Type == plant)  -> ask_ferner(Ferner)             ; Ferner = no),
+  ((Type == plant)  -> ask_fruit(Fruit)               ; Fruit = no),
+  ((Type == object) -> ask_vehicle(Vehicle)           ; Vehicle = no),
+  ((Type == object) -> ask_water(Water)               ; Water = no),
+  ask_underwater(Underwater),
+  ((Type == object) -> ask_liquid(Liquid)             ; Liquid = no),
+  ((Type == object) -> ask_write(Write)               ; Write = no),
+  ((Type == animal) -> ask_insect(Insect)             ; Insect = no),
+  ((Type == animal) -> ask_roar(Roar)                 ; Roar = no),
+  ((Type == animal) -> ask_fly(Fly)                   ; Fly = no),
+  ((Type == animal) -> ask_egg(Egg)                   ; Egg = no),
+  ((Type == animal) -> ask_neigh(Neigh)               ; Neigh = no),
+  ((Type == object) -> Red = no                       ; ask_red(Red)),
+  ((Type == animal) -> ask_swim(Swim)                 ; Swim = no),
+  report(Thing, Type, Life, Mammal, Vehicle, Water, Underwater, Ferner, Fruit, Friend,
+       Liquid, Write, Insect, Roar, Fly, Egg, Neigh, Red, Swim)
 ).
 
 % Report Yes or No if the item is matched properly.
-report(Thing, Type, Life, Mammal, Vehicle, Water, Underwater, Ferner, Fruit, Friend) :-
-  write(Thing),
-  write(Type),
-  write(Life),
-  write(Mammal),
-  write(Vehicle),
-  write(Water),
-  write(Underwater),
-  write(Ferner),
-  write(Fruit),
-  write(Friend),
+report(Thing, Type, Life, Mammal, Vehicle, Water, Underwater, Ferner, Fruit, Friend,
+       Liquid, Write, Insect, Roar, Fly, Egg, Neigh, Red, Swim) :-
   type(Thing, Type),
   ((Life        == yes) -> alive(Thing);        \+alive(Thing)),
   ((Mammal      == yes) -> mammal(Thing);       \+mammal(Thing)),
@@ -170,6 +175,15 @@ report(Thing, Type, Life, Mammal, Vehicle, Water, Underwater, Ferner, Fruit, Fri
   ((Vehicle     == yes) -> vehicle(Thing);      \+vehicle(Thing)),
   ((Ferner      == yes) -> ferner(Thing);       \+ferner(Thing)),
   ((Fruit       == yes) -> fruit(Thing);        \+fruit(Thing)),
-  ((Friend      == yes) -> friend(Thing);       \+friend(Thing)).
+  ((Friend      == yes) -> friend(Thing);       \+friend(Thing)),
+  ((Liquid      == yes) -> liquid(Thing);       \+liquid(Thing)),
+  ((Write      == yes) -> writes(Thing);       \+writes(Thing)),
+  ((Insect      == yes) -> insect(Thing);       \+insect(Thing)),
+  ((Roar      == yes) -> roar(Thing);       \+roar(Thing)),
+  ((Fly      == yes) -> fly(Thing);       \+fly(Thing)),
+  ((Egg      == yes) -> egg(Thing);       \+egg(Thing)),
+  ((Neigh      == yes) -> neigh(Thing);       \+neigh(Thing)),
+  ((Red      == yes) -> red(Thing);       \+red(Thing)),
+  ((Swim      == yes) -> swims(Thing);       \+swims(Thing)).
 
 % vim: filetype=prolog:
